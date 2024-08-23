@@ -1,52 +1,101 @@
-export type ItemBase = {
-  count: number;
-  productId: string;
-  remainder?: number;
-};
+export interface Dimensions {
+  width: number;
+  height: number;
+}
 
-export type IOrderItem = IProductBase & ItemBase;
+export interface IUserDetails {
+  avatar: string;
+  firstName?: string;
+  lastName?: string;
+  fullName: string;
+  shortName: string;
+  position: string;
+  description: string;
+  operatorPhone: string;
+  birthDate?: string;
+  location?: string;
+  workStartedDate?: string;
+}
 
-export type IOrderItemResponse = IOrderItem & {
-  productName: string;
-  productImgUrl: string;
-};
+export interface IUserLinks {
+  discord?: string;
+  instagram?: string;
+  facebook?: string;
+  twitter?: string;
+  linkedIn?: string;
+  youtube?: string;
+  gitHub?: string;
+  website?: string;
+}
 
-export type ICartItem = IOrderItem & {
-  productImgUrl?: string;
-  name: string;
-};
-
-export type AddressFormData = {
-  firstName: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  province: string;
-  district: string;
-  street: string;
-  details: string;
-  registerNumber: string;
-  companyName: string;
-  marker: {
-    lat: number;
-    lng: number;
-  };
-  address?: {
-    others: string;
-    street: string;
-    city_district: string;
-    city: string;
-    additional: string;
-  };
-};
-
-export type IOrder = {
-  items: IOrderItemResponse[];
-  registerNumber: string | null;
-  billType: string | null;
-  deliveryInfo: (AddressFormData & {description: string}) | null;
+export interface IBranch {
   _id: string;
-};
+  title: string;
+  address: string;
+  radius: number;
+  coordinate: {
+    latitude: string;
+    longitude: string;
+  };
+}
+
+export interface IUser {
+  _id: string;
+  firstName: string;
+  fullName: string;
+  lastName: string;
+  email: string;
+  details?: IUserDetails;
+  type: string;
+  companyName: string;
+  username?: string;
+  erxesCustomerId?: string;
+  avatar?: string;
+  links?: IUserLinks;
+  customFieldsData?: {
+    [key: string]: any;
+  };
+  permissionActions?: string[];
+  branches?: IBranch[];
+}
+export interface IEventData {
+  where: string;
+  startDate: Date;
+  endDate: Date;
+  visibility: string;
+  goingUserIds: string[];
+  interestedUserIds: string[];
+}
+
+export interface IFeed {
+  _id: string;
+  title: string;
+  description?: string;
+  category?: string;
+  images?: IAttachment[];
+  attachments?: IAttachment[];
+  isPinned?: boolean;
+  contentType?: string;
+  recipientIds: string[];
+  customFieldsData?: string;
+  ceremonyData?: string;
+  eventData?: IEventData;
+  startDate?: Date;
+  endDate?: Date;
+  createdBy?: string;
+  createdAt?: number | string | Date;
+  updatedBy?: string;
+  updatedAt?: Date;
+  department?: string;
+  departmentIds?: string[];
+  branchIds?: string[];
+  unitId?: string;
+  createdUser?: IUser;
+  commentCount?: number;
+  background?: IAttachment;
+  heartCount?: number;
+  isHearted?: boolean;
+}
 
 export interface IAttachment {
   name: string;
@@ -54,209 +103,107 @@ export interface IAttachment {
   url: string;
   size?: number;
   duration?: number;
-}
-export interface ICustomerLinks {
-  website?: string;
-  facebook?: string;
-  instagram?: string;
-  twitter?: string;
-  linkedIn?: string;
-  youtube?: string;
-  github?: string;
+  color?: string;
 }
 
-export interface IVisitorContact {
-  email?: string;
-  phone?: string;
-}
-
-export interface ICustomerDoc {
-  firstName?: string;
-  middleName?: string;
-  lastName?: string;
-  phones?: string[];
-  sex?: number;
-  primaryPhone?: string;
-  primaryEmail?: string;
-  emails?: string[];
-  avatar?: string;
-  state?: string;
-  ownerId?: string;
-  position?: string;
-  location?: {
-    userAgent?: string;
-    country?: string;
-    countryCode?: string;
-    remoteAddress?: string;
-    hostname?: string;
-    language?: string;
-  };
-  department?: string;
-  leadStatus?: string;
-  hasAuthority?: string;
-  description?: string;
-  isSubscribed?: string;
-  links?: ICustomerLinks;
-  customFieldsData?: {[key: string]: any};
-  visitorContactInfo?: IVisitorContact;
-  code?: string;
-  birthDate?: string;
-  emailValidationStatus?: string;
-  phoneValidationStatus?: string;
-
-  isOnline?: boolean;
-  lastSeenAt?: number;
-  sessionCount?: number;
-  score?: number;
-}
-
-export interface ICustomField {
-  field: string;
-  value: any;
-  stringValue?: string;
-  numberValue?: number;
-  dateValue?: Date;
-}
-
-export interface ICarDoc {
-  createdAt?: Date;
-  modifiedAt?: Date;
-
-  scopeBrandIds?: string[];
-  ownerId?: string;
-  mergedIds?: string[];
-  status?: string;
-  description?: string;
-
-  plateNumber?: string;
-  vinNumber?: string;
-  colorCode?: string;
-  categoryId?: string;
-
-  bodyType?: string;
-  fuelType?: string;
-  gearBox?: string;
-
-  vintageYear?: number;
-  importYear?: number;
-
-  attachment?: IAttachment;
-}
-
-export interface ICarCategory {
-  object: IAttachment;
+export interface IComment {
   _id: string;
-  name: string;
-  order: string;
-  code: string;
-  description?: string;
-  parentId?: string;
+  createdUser?: {
+    _id?: string;
+    username?: string;
+    email?: string;
+    details: {
+      avatar: string;
+      fullName: string;
+      position: string;
+    };
+  };
+  comment: string;
+  replies?: IComment[];
+  contentId: string;
   createdAt: Date;
-  carCount: number;
-  isRoot: boolean;
-  image?: IAttachment;
-  secondaryImages?: IAttachment[];
-  productCategoryId?: string;
 }
 
-export interface IUserDetails {
-  avatar?: string;
-  fullName?: string;
-  shortName?: string;
-  description?: string;
-  birthDate?: Date;
-  position?: string;
-  workStartedDate?: Date;
-  location?: string;
-  operatorPhone?: string;
-  firstName?: string;
-  middleName?: string;
-  lastName?: string;
+export interface ISeenList {
+  lastSeenMessageId: string;
+  user: IUser;
 }
 
-export interface IUserLinks {
-  facebook?: string;
-  twitter?: string;
-  linkedIn?: string;
-  youtube?: string;
-  github?: string;
-  website?: string;
+export interface IReaction {
+  user: IUser;
+  reaction: string;
 }
-
-export interface IUserDoc {
-  createdAt?: Date;
-  username: string;
-  email: string;
-  isActive?: boolean;
-  details?: IUserDetails;
-  isOwner?: boolean;
-  status?: string;
-  links?: IUserLinks;
-  getNotificationByEmail?: boolean;
-  permissionActions?: string[];
-  configs?: any;
-  configsConstants?: any;
-  score?: number;
-  branchIds: string[];
-  departmentIds: string[];
-  positionIds: string[];
-  employeeId?: string;
-}
-
-export interface IUser extends IUserDoc {
+export interface IChatMessage {
   _id: string;
-  branchIds: string[];
-  departmentIds: string[];
-  positionIds: string[];
-  customFieldsData?: {
-    [key: string]: any;
-  };
-  isShowNotification?: boolean;
-  isSubscribed?: boolean;
+  content: string;
+  type: string;
+  attachments: IAttachment[];
+  createdAt: string;
+  createdUser: IUser;
+  seenList: ISeenList[];
+  relatedMessage: IChatMessage;
+  isPinned: boolean;
+  reactions: IReaction[];
 }
 
-export interface ICar extends ICarDoc {
+export interface IChat {
   _id: string;
-  owner: IUser;
-  category?: ICarCategory;
-  customFieldsData: JSON;
-}
-
-export type IProductBase = {
-  _id: string;
-  unitPrice: number;
-};
-
-export type IProduct = IProductBase & {
   name: string;
-  code?: string;
-  productCount?: number;
-  attachment: {
-    url: string;
-  };
-  remainder?: number;
+  type: string;
+  isSeen: string;
+  featuredImage: any[];
+  createdAt: string;
+  createdUser: IUser;
+  participantUsers: IUser[];
+  lastMessage: IChatMessage;
+}
+
+export type QueryResponse = {
+  loading: boolean;
+  refetch: (variables?: any) => Promise<any>;
+  error?: string;
 };
 
-export type IPicker = {
-  value: string | undefined;
-  label: string | undefined;
-};
+export type AbsenceQueryResponse = {
+  requestsMain: { list: IAbsence[]; totalCount: number };
+} & QueryResponse;
 
-export type ILocation = {
-  latitude: number;
-  longitude: number;
-};
+export interface IAbsence {
+  _id: string;
+  user: IUser;
+  startTime: Date;
+  endTime: Date;
+  holidayName: string;
+  reason: string;
+  explanation: string;
+  solved: boolean;
+  status: string;
+  attachment: IAttachment;
 
-export type IHandleOrderBase = {
-  onCompleted?: any;
-};
+  absenceTimeType: string;
+  requestDates: string[];
+  totalHoursOfAbsence: string;
 
-export type IAddItem = IHandleOrderBase & {
-  cart: ICartItem[] | IOrderItem[];
-  product: (IProduct & ItemBase) | ICartItem;
-};
+  note?: string;
 
-export type IChangeCount = IHandleOrderBase & {
-  cart: IOrderItem[];
-  product: ItemBase;
-};
+  absenceType?: string;
+}
+
+export interface ITimeclock {
+  _id: string;
+  shiftStart: Date;
+  shiftActive?: boolean;
+  user: IUser;
+  shiftEnd?: Date;
+  employeeUserName?: string;
+  employeeId?: number;
+  deviceName?: string;
+  deviceType?: string;
+  inDevice?: string;
+  outDevice?: string;
+  inDeviceType?: string;
+  outDeviceType?: string;
+  branchName?: string;
+
+  shiftNotClosed?: boolean;
+}

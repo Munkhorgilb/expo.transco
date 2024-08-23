@@ -5,7 +5,7 @@ const black = "#000000";
 const white = "#FFFFFF";
 
 // Core colors
-const primary = "#0076CB";
+const primary = "#3FBA73";
 const secondary = "#C2C2C4";
 const inactive = "#AEAEAE";
 const border = "#E2E2E2";

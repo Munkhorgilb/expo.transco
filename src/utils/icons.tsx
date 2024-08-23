@@ -14,6 +14,7 @@ import Svg, {
   LinearGradient,
   Stop,
 } from "react-native-svg";
+import colors from "./colors";
 
 export function Mail3Icon({ stroke = "#667085" }: { stroke?: string }) {
   return (
@@ -114,6 +115,42 @@ export function ArrowDown() {
       <Path
         fill="#000"
         d="M11.687 16.695a.667.667 0 0 1 0-1.333h3.105l-8.29-8.29a.667.667 0 1 1 .942-.943l8.29 8.29v-3.104a.667.667 0 0 1 1.334 0v4.714a.667.667 0 0 1-.667.666h-4.714Z"
+      />
+    </Svg>
+  );
+}
+
+export function ArrowLeft() {
+  return (
+    <Svg width={16} height={16} fill="none">
+      <Path
+        fill="#000"
+        d="M.862 8.472a.667.667 0 0 1 0-.943l4-4a.667.667 0 0 1 .943.943L2.943 7.334h11.724a.667.667 0 1 1 0 1.333H2.943l2.862 2.862a.667.667 0 0 1-.943.943l-4-4Z"
+      />
+    </Svg>
+  );
+}
+
+export function MagnifyingGlassIcon() {
+  return (
+    <Svg width={24} height={24} fill="none">
+      <Path
+        stroke={colors.gray400}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="m21 21-3.5-3.5m2.5-6a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0Z"
+      />
+    </Svg>
+  );
+}
+
+export function PhoneIcon() {
+  return (
+    <Svg width={24} height={24} fill="none">
+      <Path
+        fill="#fff"
+        d="M21 16.42v3.536a1 1 0 0 1-.93.998c-.437.03-.794.046-1.07.046-8.837 0-16-7.163-16-16 0-.276.015-.633.046-1.07A1 1 0 0 1 4.044 3H7.58a.5.5 0 0 1 .498.45c.023.23.044.413.064.552A13.9 13.9 0 0 0 9.35 8.003c.095.2.033.439-.147.567l-2.158 1.542a13.047 13.047 0 0 0 6.844 6.844l1.54-2.154a.462.462 0 0 1 .573-.149 13.9 13.9 0 0 0 4 1.205c.139.02.322.042.55.064a.5.5 0 0 1 .449.498H21Z"
       />
     </Svg>
   );

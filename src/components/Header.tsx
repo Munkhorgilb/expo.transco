@@ -17,8 +17,10 @@ const Header = () => {
         accessibilityIgnoresInvertColors
       />
       <View style={[s.ml10, s.flex1]}>
-        <TextView bold>Б.Баянжаргал</TextView>
-        <TextView color={"#000000A3"} style={s.mt5}>
+        <TextView bold large>
+          Б.Баянжаргал
+        </TextView>
+        <TextView color={"#000000A3"} style={s.mt5} large>
           Ашиглалт засварын инженер
         </TextView>
       </View>
@@ -35,12 +37,12 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 16,
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: 15,
     alignItems: "center",
   },
   avatar: {
-    width: 48,
-    height: 48,
+    width: 50,
+    height: 50,
   },
   iconContainer: {
     width: 40,

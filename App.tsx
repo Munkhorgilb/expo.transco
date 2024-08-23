@@ -17,11 +17,24 @@ import Login from "#/screen/Login";
 import More from "#/screen/More";
 import Home from "#/screen/Home";
 import { BottomBar } from "#/route/BottomBar";
+import AppProvider from "#/provider/AppProvider";
+import useApp from "#/hooks/useApp";
+import Branch from "#/screen/Branch";
+import UserDetail from "#/screen/UserDetail";
+import { useFonts } from "expo-font";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const App = () => {
+  const [loaded, error] = useFonts({
+    "Inter-Black": require("./assets/fonts/Inter-Regular.ttf"),
+  });
+
+  if (!loaded && !error) {
+    return null;
+  }
+
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <GestureHandlerRootView style={styles.gestureHandlerRootView}>
@@ -29,7 +42,9 @@ const App = () => {
           <ModalProvider>
             <LightBoxProvider>
               <StatusBar style={"dark"} />
-              <InnerApp />
+              <AppProvider>
+                <InnerApp />
+              </AppProvider>
             </LightBoxProvider>
           </ModalProvider>
         </ApolloProvider>
@@ -41,6 +56,12 @@ const App = () => {
 export default App;
 
 function InnerApp() {
+  const { hasSession } = useApp();
+
+  if (!hasSession) {
+    return <Login />;
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -49,7 +70,8 @@ function InnerApp() {
         }}
       >
         <Stack.Screen name="Main" component={MainStackScreens} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Branch" component={Branch} />
+        <Stack.Screen name="UserDetail" component={UserDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );

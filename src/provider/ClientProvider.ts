@@ -6,7 +6,7 @@ import {
 } from "@apollo/client/core";
 import { onError } from "@apollo/client/link/error";
 
-const baseUrl = "erxes.priuscenter.mn/gateway";
+const baseUrl = "edc.api.erxes.io/api";
 
 export const apiUrl = `https://${baseUrl}`;
 
@@ -20,7 +20,7 @@ const httpLink = createHttpLink({
   // credentials: 'include',
   headers: {
     "erxes-app-token":
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOnsiY3JlYXRlZEF0IjoiMjAyNC0wMy0yMVQxNzowMDoyMy42ODBaIiwibmFtZSI6IlByaXVzIENlbnRlciBNb2JpbGUgQXBwIiwidXNlckdyb3VwSWQiOiJDRkROanE1cmg2TDVEUkIyUCIsImV4cGlyZURhdGUiOiIyMDQwLTEyLTMxVDA5OjQ1OjAxLjUyNVoiLCJhbGxvd0FsbFBlcm1pc3Npb24iOnRydWUsIm5vRXhwaXJlIjp0cnVlLCJfaWQiOiJSM2hlYXRRU3J4eFB3NHhsV2djd0giLCJfX3YiOjB9LCJpYXQiOjE3MTExODcxMTh9.f9_F4zveez1xS-nHmxpj4Nlsn2yCz2YMeQfibpEL5Z8",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOnsibmFtZSI6IkFkbWluIiwiY3JlYXRlZEF0IjoiMjAyNC0wOC0yM1QwMzo1MjozMS43ODRaIiwidXNlckdyb3VwSWQiOiI0RUh5ZFREQWlzMkxkUW5abiIsImV4cGlyZURhdGUiOiIyMDMwLTEyLTMxVDA4OjU4OjU5LjkzMFoiLCJub0V4cGlyZSI6dHJ1ZSwiYWxsb3dBbGxQZXJtaXNzaW9uIjp0cnVlLCJfaWQiOiJnbnd5NlJROTlQWFJGNGtpQnhCNlIiLCJfX3YiOjB9LCJpYXQiOjE3MjQ0MDM1NTN9.CKOZ3_A48Q1J3RKsBR85kTam4w0N54oBbLCG9OEG0Co",
   },
 });
 
