@@ -1,4 +1,4 @@
-import { useNonReactiveCallback } from "@/hooks/useNonReactiveCallback";
+import { useNonReactiveCallback } from "#/hooks/useNonReactiveCallback";
 import React from "react";
 import { StyleProp, ViewStyle } from "react-native";
 

@@ -2,7 +2,8 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { ConfirmModal, useModalControls } from "./ModalProvider";
-import { ThemedText } from "@/components/ThemedText";
+import TextView from "#/components/TextView";
+
 export const snapPoints = ["60%"];
 
 export function Component({
@@ -29,10 +30,10 @@ export function Component({
   return (
     <View testID="confirmModal" style={[styles.container]}>
       <View>
-        <ThemedText style={styles.title}>{title}</ThemedText>
+        <TextView style={styles.title}>{title}</TextView>
       </View>
       {typeof message === "string" ? (
-        <ThemedText style={[styles.description]}>{message}</ThemedText>
+        <TextView style={[styles.description]}>{message}</TextView>
       ) : (
         message()
       )}
@@ -44,9 +45,7 @@ export function Component({
         accessibilityRole="button"
         accessibilityHint=""
       >
-        <ThemedText>
-          {confirmBtnText ?? <ThemedText>Тийм</ThemedText>}
-        </ThemedText>
+        <TextView>{confirmBtnText ?? <TextView>Тийм</TextView>}</TextView>
       </TouchableOpacity>
       {onPressCancel === undefined ? null : (
         <TouchableOpacity
@@ -56,9 +55,7 @@ export function Component({
           accessibilityRole="button"
           accessibilityHint=""
         >
-          <ThemedText>
-            {cancelBtnText ?? <ThemedText>Үгүй</ThemedText>}
-          </ThemedText>
+          <TextView>{cancelBtnText ?? <TextView>Үгүй</TextView>}</TextView>
         </TouchableOpacity>
       )}
     </View>

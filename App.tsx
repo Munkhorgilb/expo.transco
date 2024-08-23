@@ -28,7 +28,7 @@ const App = () => {
         <ApolloProvider client={client}>
           <ModalProvider>
             <LightBoxProvider>
-              <StatusBar style={"light"} />
+              <StatusBar style={"dark"} />
               <InnerApp />
             </LightBoxProvider>
           </ModalProvider>
@@ -43,7 +43,11 @@ export default App;
 function InnerApp() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen name="Main" component={MainStackScreens} />
         <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>

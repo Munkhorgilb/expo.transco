@@ -14,9 +14,10 @@ import Animated from "react-native-reanimated";
 import { useNavigationTabState } from "./useNavigationTabState";
 import { getTabState, TabState } from "./helpers";
 import colors from "#/utils/colors";
-import { ActivityIcon, HomeIcon } from "#/utils/icons";
-import { Image } from "expo-image";
+import { MoreIcon, HomeIcon } from "#/utils/icons";
 import { deviceWidth } from "#/utils/utils";
+import TextView from "#/components/TextView";
+import { s } from "#/utils/styles";
 
 export const BottomBar = ({ navigation }: BottomTabBarProps) => {
   const safeAreaInsets = useSafeAreaInsets();
@@ -40,15 +41,7 @@ export const BottomBar = ({ navigation }: BottomTabBarProps) => {
   );
 
   const onPressHome = React.useCallback(() => onPressTab("Home"), [onPressTab]);
-  const onPressActivity = React.useCallback(
-    () => onPressTab("Activity"),
-    [onPressTab]
-  );
-  const onPressProfile = React.useCallback(
-    () => onPressTab("Profile"),
-    [onPressTab]
-  );
-
+  const onPressMore = React.useCallback(() => onPressTab("More"), [onPressTab]);
   function clamp(v: number, min: number, max: number): number {
     return Math.min(max, Math.max(min, v));
   }
@@ -62,36 +55,28 @@ export const BottomBar = ({ navigation }: BottomTabBarProps) => {
             Platform.OS === "ios"
               ? clamp(safeAreaInsets.bottom, 30, 30)
               : clamp(safeAreaInsets.bottom, 10, 10),
-          backgroundColor: colors.primary600,
-          paddingTop: 5,
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: -2,
-          },
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-          elevation: 5,
         },
       ]}
     >
       <Btn
         testID="bottomBarHomeBtn"
-        icon={<HomeIcon size={24} style={[styles.ctrlIcon, styles.homeIcon]} />}
+        icon={<HomeIcon fill={"#000"} />}
+        activeIcon={<HomeIcon />}
         onPress={onPressHome}
         accessibilityRole="tab"
         accessibilityHint=""
         isActive={isAtHome}
+        text={"Нүүр"}
       />
       <Btn
         testID="bottomBarSearchBtn"
-        icon={
-          <ActivityIcon size={24} style={[styles.ctrlIcon, styles.homeIcon]} />
-        }
-        onPress={onPressActivity}
+        icon={<MoreIcon fill={"#000"} />}
+        activeIcon={<MoreIcon />}
+        onPress={onPressMore}
         accessibilityRole="search"
         accessibilityHint=""
         isActive={isAtMore}
+        text={"Бусад"}
       />
     </Animated.View>
   );
@@ -107,45 +92,49 @@ interface BtnProps
   > {
   testID?: string;
   icon?: JSX.Element;
+  activeIcon?: JSX.Element;
   notificationCount?: string;
   onPress?: (event: GestureResponderEvent) => void;
   onLongPress?: (event: GestureResponderEvent) => void;
   isActive?: boolean;
+  text: string;
 }
 
 function Btn({
   testID,
   icon,
+  activeIcon,
   onPress,
   onLongPress,
   accessible,
   accessibilityHint,
   accessibilityLabel,
   isActive,
+  text,
 }: BtnProps) {
   return (
-    <View
-      style={{
-        flex: 1,
-        borderColor: colors.border,
-        alignItems: "center",
+    <TouchableOpacity
+      testID={testID}
+      style={[
+        styles.ctrl,
+        {
+          backgroundColor: isActive ? colors.success : "#F5F5F5",
+        },
+      ]}
+      onPress={() => {
+        onPress && onPress;
       }}
+      onPressIn={onLongPress ? undefined : onPress}
+      onLongPress={onLongPress}
+      accessible={accessible}
+      accessibilityLabel={accessibilityLabel}
+      accessibilityHint={accessibilityHint}
     >
-      <TouchableOpacity
-        testID={testID}
-        style={[styles.ctrl]}
-        onPress={() => {
-          onPress && onPress;
-        }}
-        onPressIn={onLongPress ? undefined : onPress}
-        onLongPress={onLongPress}
-        accessible={accessible}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityHint={accessibilityHint}
-      >
-        {icon}
-      </TouchableOpacity>
-    </View>
+      {isActive ? activeIcon : icon}
+      <TextView style={s.ml10} color={isActive ? colors.white : "#000000B2"}>
+        {text}
+      </TextView>
+    </TouchableOpacity>
   );
 }
 
@@ -154,15 +143,23 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     flexDirection: "row",
-    width: deviceWidth * 0.55,
+    width: deviceWidth * 0.8,
     alignSelf: "center",
-    borderRadius: 60,
-    height: 60,
+    borderRadius: 24,
+    height: 80,
+    backgroundColor: "#FFFFFF",
+    borderColor: "#00000014",
+    borderWidth: 1,
   },
   ctrl: {
     flex: 1,
     alignItems: "center",
-    marginTop: 12,
+    flexDirection: "row",
+    justifyContent: "center",
+    margin: 16,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+    paddingVertical: 8,
   },
   ctrlIcon: {
     marginLeft: "auto",
