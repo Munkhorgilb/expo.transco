@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "transcoo",
+    "name": "ЭБЦТС - ТӨХК",
     "slug": "transcoo",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -27,11 +27,13 @@
     },
     "plugins": [
       [
-        "expo-font",
-        {
-          "fonts": ["path/to/file.ttf"]
-        }
+        "expo-font"
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "ad61374c-dfc6-4e4b-b78a-29dcdb9cbff7"
+      }
+    }
   }
 }

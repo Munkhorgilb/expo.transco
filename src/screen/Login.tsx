@@ -63,6 +63,27 @@ const SignIn = () => {
     return regex.test(email);
   };
 
+  React.useEffect(() => {
+    checkRemember();
+  }, []);
+
+  const checkRemember = async () => {
+    AsyncStorage.getItem("rememberMe").then((e) => {
+      if (e === "true") {
+        setRememberme(true);
+
+        AsyncStorage.getItem("loggedUser")
+          .then((j: any) => {
+            const user = JSON.parse(j);
+            setVariables({ email: user.email, password: user.password });
+          })
+          .catch((p) => {
+            console.log(p);
+          });
+      }
+    });
+  };
+
   const onSubmit = () => {
     if (validateEmail(variables.email)) {
       Keyboard.dismiss();

@@ -5,8 +5,10 @@ import images from "@images";
 import TextView from "./TextView";
 import { s } from "#/utils/styles";
 import { NotificationIcon } from "#/utils/icons";
+import { useNavigation } from "@react-navigation/native";
 
 const Header = () => {
+  const navigation = useNavigation<any>();
   return (
     <View style={styles.container}>
       <Image
@@ -24,7 +26,10 @@ const Header = () => {
           Ашиглалт засварын инженер
         </TextView>
       </View>
-      <Pressable style={styles.iconContainer}>
+      <Pressable
+        style={styles.iconContainer}
+        onPress={() => navigation.navigate("Notification")}
+      >
         <NotificationIcon />
       </Pressable>
     </View>

@@ -21,11 +21,6 @@ export interface IApplication {
 }
 
 const AppProvider = (props: any) => {
-  const [location, setLocation] = useState({
-    latitude: 0,
-    longitude: 0,
-  });
-
   const [session, setSession] = useState(false);
 
   const { data, loading } = useQuery(userQL.currentUser, {

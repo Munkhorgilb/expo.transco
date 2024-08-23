@@ -22,6 +22,7 @@ import useApp from "#/hooks/useApp";
 import Branch from "#/screen/Branch";
 import UserDetail from "#/screen/UserDetail";
 import { useFonts } from "expo-font";
+import Notification from "#/screen/Notification";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -70,6 +71,7 @@ function InnerApp() {
         }}
       >
         <Stack.Screen name="Main" component={MainStackScreens} />
+        <Stack.Screen name="Notification" component={Notification} />
         <Stack.Screen name="Branch" component={Branch} />
         <Stack.Screen name="UserDetail" component={UserDetail} />
       </Stack.Navigator>

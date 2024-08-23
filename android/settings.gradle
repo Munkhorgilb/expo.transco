@@ -44,7 +44,7 @@ if (getRNMinorVersion() >= 75) {
   }
 }
 
-rootProject.name = 'transcoo'
+rootProject.name = 'ЭБЦТС - ТӨХК'
 
 dependencyResolutionManagement {
   versionCatalogs {
